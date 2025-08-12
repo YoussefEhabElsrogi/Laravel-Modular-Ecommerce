@@ -1,0 +1,1484 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel Modular E-commerce API",
+        "description": "This is the API documentation for the Laravel Modular E-commerce API.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local API server"
+        }
+    ],
+    "paths": {
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get list of categories",
+                "operationId": "22f469a44156ddb19cb2b2d57fbda8fc",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "en",
+                                "ar"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of categories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Categories retrieved successfully."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Category"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "status": true,
+                                    "message": "Categories retrieved successfully.",
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "Electronics",
+                                            "created_at": "2025-08-11T10:00:00Z",
+                                            "updated_at": "2025-08-11T10:00:00Z"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "name": "Books",
+                                            "created_at": "2025-08-11T10:05:00Z",
+                                            "updated_at": "2025-08-11T10:05:00Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create a new category",
+                "description": "Create a category with English and Arabic names and an image.",
+                "operationId": "732d42dba66b1b750d27436a2da1d478",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "properties": {
+                                            "en": {
+                                                "type": "string",
+                                                "example": "Electronics"
+                                            },
+                                            "ar": {
+                                                "type": "string",
+                                                "example": "إلكترونيات"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "image": {
+                                        "type": "file",
+                                        "format": "binary",
+                                        "example": "category.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "properties": {
+                                                "en": {
+                                                    "type": "string",
+                                                    "example": "Electronics"
+                                                },
+                                                "ar": {
+                                                    "type": "string",
+                                                    "example": "إلكترونيات"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "https://example.com/images/category.jpg"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-08-11T12:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-08-11T12:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get category details by ID",
+                "description": "Retrieve a single category by its unique ID.",
+                "operationId": "ee15b3756492d3964803490b0337213d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 6
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "تم استرجاع الفئة بنجاح."
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 6,
+                                                "name": "إلكترونيات",
+                                                "image": "http://localhost:8000/uploads/categories/categories/electronics.jpg",
+                                                "created_at": "2025-08-11 18:04:38",
+                                                "updated_at": "2025-08-11 18:04:38"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "الفئة غير موجودة."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            },
+                                            "example": []
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update a category",
+                "operationId": "d7826d129cf19525e77a16bd3a714705",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "properties": {
+                                            "en": {
+                                                "type": "string",
+                                                "example": "Toys"
+                                            },
+                                            "ar": {
+                                                "type": "string",
+                                                "example": "ألعاب"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "image": {
+                                        "description": "Image file or URL",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Category updated successfully."
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 26
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Toys"
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/uploads/categories/Image_c66d33aa-4655-46eb-a7b0-8cdb08572c2b_1754934136.png"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2025-08-11 17:35:02"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2025-08-11 17:42:16"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete a category",
+                "operationId": "31bf0686d13dbdb052c4ae2d54200f6b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Category deleted successfully."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products",
+                "description": "Retrieve a list of all products with their images and categories",
+                "operationId": "4eacbc03326d45008536e33735f93c2f",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "en",
+                                "ar"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Products retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Products retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "properties": {
+                                                            "en": {
+                                                                "type": "string",
+                                                                "example": "Gaming Laptop"
+                                                            },
+                                                            "ar": {
+                                                                "type": "string",
+                                                                "example": "حاسوب محمول للألعاب"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "description": {
+                                                        "properties": {
+                                                            "en": {
+                                                                "type": "string",
+                                                                "example": "High-performance gaming laptop"
+                                                            },
+                                                            "ar": {
+                                                                "type": "string",
+                                                                "example": "حاسوب محمول عالي الأداء للألعاب"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1299.99
+                                                    },
+                                                    "images": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "example": "http://localhost/uploads/products/image1.jpg"
+                                                        }
+                                                    },
+                                                    "categories": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "name": {
+                                                                    "properties": {
+                                                                        "en": {
+                                                                            "type": "string",
+                                                                            "example": "Electronics"
+                                                                        },
+                                                                        "ar": {
+                                                                            "type": "string",
+                                                                            "example": "إلكترونيات"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "image": {
+                                                                    "type": "string",
+                                                                    "example": "http://localhost/uploads/categories/category1.jpg"
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2025-01-01 00:00:00"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2025-01-01 00:00:00"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-01-01 00:00:00"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-01-01 00:00:00"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Internal server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create a new product",
+                "description": "Create a new product with multilingual content, images, and category associations. All fields are required for product creation.",
+                "operationId": "createProduct",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "en",
+                                "ar"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Product creation data including multilingual content, images, and categories",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name[en]",
+                                    "name[ar]",
+                                    "description[en]",
+                                    "description[ar]",
+                                    "price",
+                                    "images",
+                                    "categories"
+                                ],
+                                "properties": {
+                                    "name[en]": {
+                                        "description": "Product name in English (required, 3-100 characters)",
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "minLength": 3,
+                                        "example": "Gaming Laptop"
+                                    },
+                                    "name[ar]": {
+                                        "description": "Product name in Arabic (required, 3-100 characters)",
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "minLength": 3,
+                                        "example": "حاسوب محمول للألعاب"
+                                    },
+                                    "description[en]": {
+                                        "description": "Product description in English (required, 3-1000 characters)",
+                                        "type": "string",
+                                        "maxLength": 1000,
+                                        "minLength": 3,
+                                        "example": "High-performance gaming laptop with advanced graphics and fast processor"
+                                    },
+                                    "description[ar]": {
+                                        "description": "Product description in Arabic (required, 3-1000 characters)",
+                                        "type": "string",
+                                        "maxLength": 1000,
+                                        "minLength": 3,
+                                        "example": "حاسوب محمول عالي الأداء للألعاب مع رسومات متقدمة ومعالج سريع"
+                                    },
+                                    "price": {
+                                        "description": "Product price (required, must be 0 or greater)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "minimum": 0,
+                                        "example": 1299.99
+                                    },
+                                    "images[]": {
+                                        "description": "Product images (required, at least one image)",
+                                        "type": "array",
+                                        "items": {
+                                            "description": "Image file (jpeg, png, jpg, gif, svg)",
+                                            "type": "string",
+                                            "format": "binary"
+                                        },
+                                        "minItems": 1
+                                    },
+                                    "categories[]": {
+                                        "description": "Category IDs (required, at least one category)",
+                                        "type": "array",
+                                        "items": {
+                                            "description": "Valid category ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "minItems": 1,
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product created successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "description": "Multilingual product name",
+                                                    "properties": {
+                                                        "en": {
+                                                            "type": "string",
+                                                            "example": "Gaming Laptop"
+                                                        },
+                                                        "ar": {
+                                                            "type": "string",
+                                                            "example": "حاسوب محمول للألعاب"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "description": {
+                                                    "description": "Multilingual product description",
+                                                    "properties": {
+                                                        "en": {
+                                                            "type": "string",
+                                                            "example": "High-performance gaming laptop with advanced graphics and fast processor"
+                                                        },
+                                                        "ar": {
+                                                            "type": "string",
+                                                            "example": "حاسوب محمول عالي الأداء للألعاب مع رسومات متقدمة ومعالج سريع"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1299.99
+                                                },
+                                                "images": {
+                                                    "description": "Array of uploaded image URLs",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "http://localhost/uploads/products/image1.jpg"
+                                                    }
+                                                },
+                                                "categories": {
+                                                    "description": "Associated categories",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "properties": {
+                                                                    "en": {
+                                                                        "type": "string",
+                                                                        "example": "Electronics"
+                                                                    },
+                                                                    "ar": {
+                                                                        "type": "string",
+                                                                        "example": "إلكترونيات"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "image": {
+                                                                "type": "string",
+                                                                "example": "http://localhost/uploads/categories/category1.jpg"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-01-01 00:00:00"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-01-01 00:00:00"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-01 00:00:00"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-01 00:00:00"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation failed"
+                                        },
+                                        "errors": {
+                                            "description": "Validation errors for each field",
+                                            "properties": {
+                                                "name.en": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The name.en field is required."
+                                                    }
+                                                },
+                                                "price": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The price must be a number."
+                                                    }
+                                                },
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The images field is required."
+                                                    }
+                                                },
+                                                "categories.0": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The selected categories.0 is invalid."
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to create product due to server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get a specific product",
+                "description": "Retrieve details of a specific product by ID",
+                "operationId": "7e404ea20b47603a81c1c6d7f82e7485",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product retrieved successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "properties": {
+                                                        "en": {
+                                                            "type": "string",
+                                                            "example": "Gaming Laptop"
+                                                        },
+                                                        "ar": {
+                                                            "type": "string",
+                                                            "example": "حاسوب محمول للألعاب"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "description": {
+                                                    "properties": {
+                                                        "en": {
+                                                            "type": "string",
+                                                            "example": "High-performance gaming laptop"
+                                                        },
+                                                        "ar": {
+                                                            "type": "string",
+                                                            "example": "حاسوب محمول عالي الأداء للألعاب"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1299.99
+                                                },
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "http://localhost/uploads/products/image1.jpg"
+                                                    }
+                                                },
+                                                "categories": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Electronics"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update a product",
+                "description": "Update an existing product with new multilingual content, images, and categories. All fields are required for update.",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated product data including multilingual content, optional images, and categories",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name[en]",
+                                    "name[ar]",
+                                    "description[en]",
+                                    "description[ar]",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "name[en]": {
+                                        "description": "Updated product name in English (required, 3-100 characters)",
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "minLength": 3,
+                                        "example": "Updated Gaming Laptop Pro"
+                                    },
+                                    "name[ar]": {
+                                        "description": "Updated product name in Arabic (required, 3-100 characters)",
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "minLength": 3,
+                                        "example": "حاسوب محمول محدث للألعاب المحترف"
+                                    },
+                                    "description[en]": {
+                                        "description": "Updated product description in English (required, 3-1000 characters)",
+                                        "type": "string",
+                                        "maxLength": 1000,
+                                        "minLength": 3,
+                                        "example": "Enhanced high-performance gaming laptop with latest graphics and ultra-fast processor"
+                                    },
+                                    "description[ar]": {
+                                        "description": "Updated product description in Arabic (required, 3-1000 characters)",
+                                        "type": "string",
+                                        "maxLength": 1000,
+                                        "minLength": 3,
+                                        "example": "حاسوب محمول محسن عالي الأداء للألعاب مع أحدث الرسومات ومعالج فائق السرعة"
+                                    },
+                                    "price": {
+                                        "description": "Updated product price (required, must be 0 or greater)",
+                                        "type": "number",
+                                        "format": "float",
+                                        "minimum": 0,
+                                        "example": 1599.99
+                                    },
+                                    "images[]": {
+                                        "description": "New product images (optional, replaces all existing images if provided)",
+                                        "type": "array",
+                                        "items": {
+                                            "description": "Image file (jpeg, png, jpg, gif, svg)",
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "categories[]": {
+                                        "description": "Updated category IDs (optional, replaces all existing categories if provided)",
+                                        "type": "array",
+                                        "items": {
+                                            "description": "Valid category ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "example": [
+                                            1,
+                                            3,
+                                            5
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product updated successfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "description": "Updated multilingual product name",
+                                                    "properties": {
+                                                        "en": {
+                                                            "type": "string",
+                                                            "example": "Updated Gaming Laptop Pro"
+                                                        },
+                                                        "ar": {
+                                                            "type": "string",
+                                                            "example": "حاسوب محمول محدث للألعاب المحترف"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "description": {
+                                                    "description": "Updated multilingual product description",
+                                                    "properties": {
+                                                        "en": {
+                                                            "type": "string",
+                                                            "example": "Enhanced high-performance gaming laptop with latest graphics and ultra-fast processor"
+                                                        },
+                                                        "ar": {
+                                                            "type": "string",
+                                                            "example": "حاسوب محمول محسن عالي الأداء للألعاب مع أحدث الرسومات ومعالج فائق السرعة"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 1599.99
+                                                },
+                                                "images": {
+                                                    "description": "Updated image URLs",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "http://localhost/uploads/products/updated_image1.jpg"
+                                                    }
+                                                },
+                                                "categories": {
+                                                    "description": "Updated associated categories",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "name": {
+                                                                "properties": {
+                                                                    "en": {
+                                                                        "type": "string",
+                                                                        "example": "Electronics"
+                                                                    },
+                                                                    "ar": {
+                                                                        "type": "string",
+                                                                        "example": "إلكترونيات"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "image": {
+                                                                "type": "string",
+                                                                "example": "http://localhost/uploads/categories/category1.jpg"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-01-01 00:00:00"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-01-01 00:00:00"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-01 00:00:00"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-01-01 12:00:00"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation failed"
+                                        },
+                                        "errors": {
+                                            "description": "Validation errors for each field",
+                                            "properties": {
+                                                "name.en": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The name.en field is required."
+                                                    }
+                                                },
+                                                "price": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The price must be a number."
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to update product due to server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete a product",
+                "description": "Permanently delete an existing product and all its associated data including images, categories associations, and related records. This action cannot be undone.",
+                "operationId": "deleteProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product deleted successfully"
+                                        },
+                                        "data": {
+                                            "description": "Empty array indicating successful deletion",
+                                            "type": "array",
+                                            "items": {},
+                                            "example": []
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product not found"
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to delete product due to server error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Category": {
+                "title": "Category",
+                "description": "Category model",
+                "properties": {
+                    "id": {
+                        "description": "Category ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Category name",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "Category image URL",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Created timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Updated timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryStoreRequest": {
+                "title": "Category Store Request",
+                "description": "Request body for creating a category",
+                "required": [
+                    "name",
+                    "image"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Category name in different languages",
+                        "properties": {
+                            "en": {
+                                "description": "English name",
+                                "type": "string"
+                            },
+                            "ar": {
+                                "description": "Arabic name",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "image": {
+                        "description": "Category image file",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryUpdateRequest": {
+                "title": "Category Update Request",
+                "description": "Request body for updating a category",
+                "properties": {
+                    "name": {
+                        "description": "Category name in different languages",
+                        "properties": {
+                            "en": {
+                                "description": "English name",
+                                "type": "string"
+                            },
+                            "ar": {
+                                "description": "Arabic name",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "image": {
+                        "description": "Category image file",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Categories",
+            "description": "API Endpoints for managing categories"
+        },
+        {
+            "name": "Products",
+            "description": "Products"
+        }
+    ]
+}

@@ -202,6 +202,15 @@ return [
         // Description
         'description.ar' => 'Description in Arabic',
         'description.en' => 'Description in English',
+
+        // Price
+        'price' => 'Price',
+
+        // Images
+        'images' => 'Images',
+
+        // Categories
+        'categories' => 'Categories',
     ],
 
 ];

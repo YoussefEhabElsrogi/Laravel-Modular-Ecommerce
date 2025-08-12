@@ -152,5 +152,14 @@ return [
         // Description
         'description.ar'        => 'الوصف باللغة العربية',
         'description.en'        => 'الوصف باللغة الانجليزية',
+
+        // Price
+        'price'                 => 'السعر',
+
+        // Images
+        'images'                => 'الصور',
+
+        // Categories
+        'categories'            => 'الفئات',
     ],
 ];

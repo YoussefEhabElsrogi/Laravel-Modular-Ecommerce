@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Product\Http\Controllers\ProductController;
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('products', ProductController::class)->names('product');
+
+Route::group(['middleware' => 'setLocale'], function () {
+    Route::apiResource('products', ProductController::class)->except(['update']);
+    Route::post('products/{product}', [ProductController::class, 'update']);
 });

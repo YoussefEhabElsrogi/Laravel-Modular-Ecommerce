@@ -45,7 +45,15 @@ return [
                  */
                 'annotations' => [
                     base_path('app'),
+                    base_path('Modules/*/app/Http/Controllers'),
                 ],
+
+                /*
+                 * Absolute path to directories that should be excluded from scanning
+                 * @deprecated Please use `scanOptions.exclude`
+                 * `scanOptions.exclude` overwrites this
+                 */
+                'excludes' => [],
             ],
         ],
     ],
@@ -98,7 +106,12 @@ return [
              * @deprecated Please use `scanOptions.exclude`
              * `scanOptions.exclude` overwrites this
              */
-            'excludes' => [],
+            'exclude' => [
+                base_path('Modules/*/Services'),
+                base_path('Modules/*/database'),
+                base_path('Modules/*/tests'),
+            ],
+
         ],
 
         'scanOptions' => [
@@ -156,7 +169,11 @@ return [
              * @note This option overwrites `paths.excludes`
              * @see \OpenApi\scan
              */
-            'exclude' => [],
+            'exclude' => [
+                base_path('Modules/*/Services'),
+                base_path('Modules/*/database'),
+                base_path('Modules/*/tests'),
+            ],
 
             /*
              * Allows to generate specs either for OpenAPI 3.0.0 or OpenAPI 3.1.0.
